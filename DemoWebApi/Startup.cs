@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using DemoWebApi.ContextDB;
 using Microsoft.AspNetCore.Builder;
@@ -28,7 +30,17 @@ namespace DemoWebApi
         {
             services.AddControllers();
             services.AddDbContext<MonAppliDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("CnxBdd")));
-
+            services.AddSwaggerGen(options => {
+                options.SwaggerDoc("v1",
+                    new Microsoft.OpenApi.Models.OpenApiInfo {
+                        Title = "DemoWebApi",
+                        Description = "Ma démo d'API WEB",
+                        Version = "v1"
+                    });
+                var fichier = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var chemin = Path.Combine(AppContext.BaseDirectory, fichier);
+                options.IncludeXmlComments(chemin);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +58,12 @@ namespace DemoWebApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(options => {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "DemoWebApi");
             });
         }
     }
