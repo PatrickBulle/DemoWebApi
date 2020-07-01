@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DemoWebApi.Migrations
 {
     [DbContext(typeof(MonAppliDbContext))]
-    [Migration("20200626124536_ChangementDeNomDesTables")]
-    partial class ChangementDeNomDesTables
+    [Migration("20200701083109_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,23 +39,19 @@ namespace DemoWebApi.Migrations
                     b.Property<string>("CheptelNumero")
                         .HasColumnType("character varying(10)");
 
-                    b.Property<char>("CodeSupression")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<string>("CodeSupression")
+                        .IsRequired()
                         .HasColumnName("cosu")
-                        .HasColumnType("character(1)")
-                        .HasDefaultValue('0');
+                        .HasColumnType("character varying(1)")
+                        .HasMaxLength(1);
 
                     b.Property<DateTime>("DateCreation")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnName("dcre")
-                        .HasColumnType("Date")
-                        .HasDefaultValueSql("CURRENT_DATE");
+                        .HasColumnType("Date");
 
                     b.Property<DateTime>("DateMiseAJour")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnName("dmaj")
-                        .HasColumnType("TimeStamp")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("TimeStamp");
 
                     b.Property<string>("Nom")
                         .HasColumnName("nobovi")
@@ -91,23 +87,19 @@ namespace DemoWebApi.Migrations
                         .HasColumnType("character varying(10)")
                         .HasMaxLength(10);
 
-                    b.Property<char>("CodeSupression")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<string>("CodeSupression")
+                        .IsRequired()
                         .HasColumnName("cosu")
-                        .HasColumnType("character(1)")
-                        .HasDefaultValue('0');
+                        .HasColumnType("character varying(1)")
+                        .HasMaxLength(1);
 
                     b.Property<DateTime>("DateCreation")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnName("dcre")
-                        .HasColumnType("Date")
-                        .HasDefaultValueSql("CURRENT_DATE");
+                        .HasColumnType("Date");
 
                     b.Property<DateTime>("DateMiseAJour")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnName("dmaj")
-                        .HasColumnType("TimeStamp")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("TimeStamp");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -135,23 +127,19 @@ namespace DemoWebApi.Migrations
                         .HasColumnType("character varying(12)")
                         .HasMaxLength(12);
 
-                    b.Property<char>("CodeSupression")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<string>("CodeSupression")
+                        .IsRequired()
                         .HasColumnName("cosu")
-                        .HasColumnType("character(1)")
-                        .HasDefaultValue('0');
+                        .HasColumnType("character varying(1)")
+                        .HasMaxLength(1);
 
                     b.Property<DateTime>("DateCreation")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnName("dcre")
-                        .HasColumnType("Date")
-                        .HasDefaultValueSql("CURRENT_DATE");
+                        .HasColumnType("Date");
 
                     b.Property<DateTime>("DateMiseAJour")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnName("dmaj")
-                        .HasColumnType("TimeStamp")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("TimeStamp");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -174,23 +162,19 @@ namespace DemoWebApi.Migrations
                         .HasColumnType("character varying(2)")
                         .HasMaxLength(2);
 
-                    b.Property<char>("CodeSupression")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<string>("CodeSupression")
+                        .IsRequired()
                         .HasColumnName("cosu")
-                        .HasColumnType("character(1)")
-                        .HasDefaultValue('0');
+                        .HasColumnType("character varying(1)")
+                        .HasMaxLength(1);
 
                     b.Property<DateTime>("DateCreation")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnName("dcre")
-                        .HasColumnType("Date")
-                        .HasDefaultValueSql("CURRENT_DATE");
+                        .HasColumnType("Date");
 
                     b.Property<DateTime>("DateMiseAJour")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnName("dmaj")
-                        .HasColumnType("TimeStamp")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("TimeStamp");
 
                     b.Property<string>("Libelle")
                         .IsRequired()

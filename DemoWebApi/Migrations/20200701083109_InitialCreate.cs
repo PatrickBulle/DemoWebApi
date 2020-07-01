@@ -8,68 +8,68 @@ namespace DemoWebApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "DbDetenteurs",
+                name: "detenteur",
                 columns: table => new
                 {
                     nudet = table.Column<string>(maxLength: 12, nullable: false),
-                    dcre = table.Column<DateTime>(type: "Date", nullable: false, defaultValueSql: "CURRENT_DATE"),
-                    dmaj = table.Column<DateTime>(type: "TimeStamp", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    cosu = table.Column<char>(nullable: false, defaultValue: '0'),
+                    dcre = table.Column<DateTime>(type: "Date", nullable: false),
+                    dmaj = table.Column<DateTime>(type: "TimeStamp", nullable: false),
+                    cosu = table.Column<string>(maxLength: 1, nullable: false),
                     Nom = table.Column<string>(maxLength: 20, nullable: false),
                     Prenom = table.Column<string>(maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DbDetenteurs", x => x.nudet);
+                    table.PrimaryKey("PK_detenteur", x => x.nudet);
                 });
 
             migrationBuilder.CreateTable(
-                name: "DbRaces",
+                name: "race",
                 columns: table => new
                 {
                     corabo = table.Column<string>(maxLength: 2, nullable: false),
-                    dcre = table.Column<DateTime>(type: "Date", nullable: false, defaultValueSql: "CURRENT_DATE"),
-                    dmaj = table.Column<DateTime>(type: "TimeStamp", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    cosu = table.Column<char>(nullable: false, defaultValue: '0'),
+                    dcre = table.Column<DateTime>(type: "Date", nullable: false),
+                    dmaj = table.Column<DateTime>(type: "TimeStamp", nullable: false),
+                    cosu = table.Column<string>(maxLength: 1, nullable: false),
                     libelo = table.Column<string>(maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DbRaces", x => x.corabo);
+                    table.PrimaryKey("PK_race", x => x.corabo);
                 });
 
             migrationBuilder.CreateTable(
-                name: "DbCheptels",
+                name: "cheptel",
                 columns: table => new
                 {
                     copach = table.Column<string>(maxLength: 2, nullable: false),
                     nuchep = table.Column<string>(maxLength: 10, nullable: false),
-                    dcre = table.Column<DateTime>(type: "Date", nullable: false, defaultValueSql: "CURRENT_DATE"),
-                    dmaj = table.Column<DateTime>(type: "TimeStamp", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    cosu = table.Column<char>(nullable: false, defaultValue: '0'),
+                    dcre = table.Column<DateTime>(type: "Date", nullable: false),
+                    dmaj = table.Column<DateTime>(type: "TimeStamp", nullable: false),
+                    cosu = table.Column<string>(maxLength: 1, nullable: false),
                     sicivi = table.Column<string>(maxLength: 20, nullable: false),
                     noraso = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DbCheptels", x => new { x.copach, x.nuchep });
+                    table.PrimaryKey("PK_cheptel", x => new { x.copach, x.nuchep });
                     table.ForeignKey(
-                        name: "FK_DbCheptels_DbDetenteurs_nuchep",
+                        name: "FK_cheptel_detenteur_nuchep",
                         column: x => x.nuchep,
-                        principalTable: "DbDetenteurs",
+                        principalTable: "detenteur",
                         principalColumn: "nudet",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "DbBovins",
+                name: "bovin",
                 columns: table => new
                 {
                     copaip = table.Column<string>(maxLength: 2, nullable: false),
                     nunati = table.Column<string>(maxLength: 12, nullable: false),
-                    dcre = table.Column<DateTime>(type: "Date", nullable: false, defaultValueSql: "CURRENT_DATE"),
-                    dmaj = table.Column<DateTime>(type: "TimeStamp", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    cosu = table.Column<char>(nullable: false, defaultValue: '0'),
+                    dcre = table.Column<DateTime>(type: "Date", nullable: false),
+                    dmaj = table.Column<DateTime>(type: "TimeStamp", nullable: false),
+                    cosu = table.Column<string>(maxLength: 1, nullable: false),
                     nobovi = table.Column<string>(maxLength: 10, nullable: true),
                     sexbov = table.Column<int>(maxLength: 1, nullable: false),
                     RaceCodeRaceBovin = table.Column<string>(nullable: true),
@@ -78,50 +78,50 @@ namespace DemoWebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DbBovins", x => new { x.copaip, x.nunati });
+                    table.PrimaryKey("PK_bovin", x => new { x.copaip, x.nunati });
                     table.ForeignKey(
-                        name: "FK_DbBovins_DbRaces_RaceCodeRaceBovin",
+                        name: "FK_bovin_race_RaceCodeRaceBovin",
                         column: x => x.RaceCodeRaceBovin,
-                        principalTable: "DbRaces",
+                        principalTable: "race",
                         principalColumn: "corabo",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DbBovins_DbCheptels_CheptelCodePays_CheptelNumero",
+                        name: "FK_bovin_cheptel_CheptelCodePays_CheptelNumero",
                         columns: x => new { x.CheptelCodePays, x.CheptelNumero },
-                        principalTable: "DbCheptels",
+                        principalTable: "cheptel",
                         principalColumns: new[] { "copach", "nuchep" },
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DbBovins_RaceCodeRaceBovin",
-                table: "DbBovins",
+                name: "IX_bovin_RaceCodeRaceBovin",
+                table: "bovin",
                 column: "RaceCodeRaceBovin");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DbBovins_CheptelCodePays_CheptelNumero",
-                table: "DbBovins",
+                name: "IX_bovin_CheptelCodePays_CheptelNumero",
+                table: "bovin",
                 columns: new[] { "CheptelCodePays", "CheptelNumero" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DbCheptels_nuchep",
-                table: "DbCheptels",
+                name: "IX_cheptel_nuchep",
+                table: "cheptel",
                 column: "nuchep");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DbBovins");
+                name: "bovin");
 
             migrationBuilder.DropTable(
-                name: "DbRaces");
+                name: "race");
 
             migrationBuilder.DropTable(
-                name: "DbCheptels");
+                name: "cheptel");
 
             migrationBuilder.DropTable(
-                name: "DbDetenteurs");
+                name: "detenteur");
         }
     }
 }
