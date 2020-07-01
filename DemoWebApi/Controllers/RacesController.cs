@@ -29,6 +29,15 @@ namespace DemoWebApi.Controllers
             return await _context.DbRaces.Where(r => r.CodeSupression.Equals("0")).ToListAsync();
         }
 
+        // GET: api/GetAllRaces
+        [Route("GetAll")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Race>>> GetDbAllRaces()
+        {
+            // Ne retourne que les races ayant le COSU à 0
+            return await _context.DbRaces.ToListAsync();
+        }
+
         // GET: api/Races/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Race>> GetRace(string id)
